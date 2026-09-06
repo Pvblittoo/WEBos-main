@@ -1,0 +1,206 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* FONDO DIVIDIDO EN DIAGONAL (FORZADO) */
+html, body {
+    background: linear-gradient(135deg, #000000 0%, #000000 50%, #FF0033 50%, #FF0033 100%) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* DESACTIVAR CANVAS Y CAPAS SOBREPUESTAS DE OTROS CSS */
+#webgl-canvas, 
+canvas, 
+.bg-overlay {
+    display: none !important;
+}
+
+/* BARRA DE NAVEGACIÓN SUPERIOR */
+.top-navbar {
+    width: 100%;
+    background-color: rgba(17, 17, 17, 0.95);
+    border-bottom: 2px solid #222222;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* LOGO NAVBAR ARRIBA A LA IZQUIERDA */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-brand-logo,
+.nav-brand img {
+    height: 40px !important;
+    width: auto !important;
+    max-height: 40px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    object-fit: contain !important;
+    filter: brightness(0) invert(1) !important;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #FF0033;
+    font-weight: bold;
+}
+
+.nav-cart {
+    color: #ffffff;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* CENTRADO DE CONTENIDO */
+.main-wrapper {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+    gap: 30px;
+}
+
+/* ENCABEZADO Y LOGO PRINCIPAL */
+.brand-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.brand-logo-box {
+    width: 100%;
+    max-width: 140px;
+    margin: 0 auto 15px auto;
+    display: block;
+    background: transparent;
+    border: none;
+}
+
+.brand-logo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.brand-name {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* TARJETA DE CONTENIDO */
+.custom-card {
+    width: 100%;
+    max-width: 650px;
+    background-color: #111111;
+    border: 2px solid #222222;
+    border-radius: 16px;
+    padding: 35px 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+}
+
+.form-title {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #FF0033;
+    padding-bottom: 8px;
+}
+
+.about-text {
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.subtitle-red {
+    color: #FF0033;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+/* BOTÓN VOLVER ATRÁS */
+.btn-back {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    color: #888888;
+    border: 1px solid #333333;
+    padding: 10px 0;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 25px;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background-color: #222222;
+    color: #ffffff;
+    border-color: #555555;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .top-navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .brand-logo-box {
+        max-width: 110px;
+    }
+}

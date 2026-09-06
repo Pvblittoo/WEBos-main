@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Jordan - Bulls Theme</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <nav class="navbar navbar-expand-lg navbar-light custom-nav" style="background-color: #ffffff !important;">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <img src="img/logo/lgo.png" alt="Logo" style="height: 50px !important; width: auto !important; display: block !important;" class="d-inline-block align-text-top me-3">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+          
+          <span id="mensaje-bienvenida" class="navbar-text fw-bold me-auto d-none" style="color: #000; font-size: 1.1rem;">
+              Bienvenido, <span id="nombre-usuario" style="color: #e50000;"></span>
+          </span>
+
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link custom-link" href="portada.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-link" href="index.html">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-link" href="nosotros.html">Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-link" href="contacto.html">Contacto</a>
+            </li>
+            
+            <li class="nav-item" id="nav-login-item">
+              <a class="nav-link custom-link fw-bold" href="acceso.html" style="color: #e50000;">Iniciar Sesión</a>
+            </li>
+
+            <li class="nav-item dropdown d-none" id="nav-user-dropdown">
+              <a class="nav-link dropdown-toggle fw-bold custom-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Mi cuenta
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#" id="logout-btn">Cerrar sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="titulo-tienda">
+        <h1>SNEAKERS STORE</h1>
+    </div>
+
+    <div class="infinite-carousel">
+        <div class="carousel-track">
+            <img src="img/re1.png" alt="Zapatilla 1">
+            <img src="img/re3.png" alt="Zapatilla 2">
+            <img src="img/re5.png" alt="Zapatilla 3">
+            <img src="img/re11.png" alt="Zapatilla 4">
+            <img src="img/re12.png" alt="Zapatilla 5">
+            <img src="img/re13.png" alt="Zapatilla 6">
+            <img src="img/re4.png" alt="Zapatilla 7">
+            <img src="img/tra1.png" alt="Zapatilla 8">
+
+            <img src="img/re1.png" alt="Zapatilla 1">
+            <img src="img/re3.png" alt="Zapatilla 2">
+            <img src="img/re5.png" alt="Zapatilla 3">
+            <img src="img/re11.png" alt="Zapatilla 4">
+            <img src="img/re12.png" alt="Zapatilla 5">
+            <img src="img/re13.png" alt="Zapatilla 6">
+            <img src="img/re4.png" alt="Zapatilla 7">
+            <img src="img/tra1.png" alt="Zapatilla 8">
+
+            <img src="img/re1.png" alt="Zapatilla 1">
+            <img src="img/re3.png" alt="Zapatilla 2">
+            <img src="img/re5.png" alt="Zapatilla 3">
+            <img src="img/re11.png" alt="Zapatilla 4">
+            <img src="img/re12.png" alt="Zapatilla 5">
+            <img src="img/re13.png" alt="Zapatilla 6">
+            <img src="img/re4.png" alt="Zapatilla 7">
+            <img src="img/tra1.png" alt="Zapatilla 8">
+
+            <img src="img/re1.png" alt="Zapatilla 1">
+            <img src="img/re3.png" alt="Zapatilla 2">
+            <img src="img/re5.png" alt="Zapatilla 3">
+            <img src="img/re11.png" alt="Zapatilla 4">
+            <img src="img/re12.png" alt="Zapatilla 5">
+            <img src="img/re13.png" alt="Zapatilla 6">
+            <img src="img/re4.png" alt="Zapatilla 7">
+            <img src="img/tra1.png" alt="Zapatilla 8">
+        </div>
+    </div>
+
+    <span></span>
+    <div class="titulo-tienda mb-4">
+        <h1>Jordan<br>Best seller</h1>
+    </div>
+
+    <div class="grid-container" id="productos-contenedor">
+        </div>
+
+    <script id="js-vertex-shader" type="x-shader/x-vertex">
+    attribute vec3 position;
+    void main() {
+        gl_Position = vec4(position, 1.0);
+    }
+    </script>
+
+    <script id="js-fragment-shader" type="x-shader/x-fragment">
+    precision highp float;
+    uniform vec2 resolution;
+    uniform float time;
+    uniform float xScale;
+    uniform float yScale;
+    uniform float distortion;
+
+    void main() {
+        vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+        float d = length(p) * distortion;
+        
+        float rx = p.x * (1.0 + d);
+        float gx = p.x;
+        float bx = p.x * (1.0 - d);
+
+        float r = 0.05 / abs(p.y + sin((rx + time) * xScale) * yScale);
+        float g = 0.05 / abs(p.y + sin((gx + time) * xScale) * yScale);
+        float b = 0.05 / abs(p.y + sin((bx + time) * xScale) * yScale);
+        
+        gl_FragColor = vec4(r, g, b, 1.0);
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/webgl-background.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/catalog.js"></script>
+    <script src="js/navbar.js"></script>
+
+
+    <footer class="footer-sneakers">
+    <div class="footer-container">
+        
+        <!-- COLUMNA 1: MARCA Y REDES -->
+        <div class="footer-col">
+            <h3 class="footer-brand">FACTURE <span>SNEAKERS</span></h3>
+            <p class="footer-text">La tienda definitiva de cultura urbana, ediciones limitadas y el mejor estilo streetwear.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TK</a>
+                <a href="#" aria-label="X (Twitter)">X</a>
+                <a href="#" aria-label="YouTube">YT</a>
+            </div>
+        </div>
+
+        <!-- COLUMNA 2: ENLACES RÁPIDOS -->
+        <div class="footer-col">
+            <h4 class="footer-title">NAVEGACIÓN</h4>
+            <ul class="footer-links">
+                <li><a href="portada.html">Inicio</a></li>
+                <li><a href="index.html">Marcas</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+            </ul>
+        </div>
+
+        <!-- COLUMNA 3: SOPORTE -->
+        <div class="footer-col">
+            <h4 class="footer-title">AYUDA</h4>
+            <ul class="footer-links">
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+            </ul>
+        </div>
+
+        <!-- COLUMNA 4: NEWSLETTER -->
+        <div class="footer-col">
+            <h4 class="footer-title">ÚNETE AL CLUB</h4>
+            <p class="footer-text">Recibe alertas de drops exclusivos y descuentos.</p>
+            <form class="footer-newsletter" onsubmit="event.preventDefault();">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">→</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- BARRA INFERIOR DE COPYRIGHT -->
+    <div class="footer-bottom">
+        <p>&copy; 2026 FACTURE SNEAKERS. TODOS LOS DERECHOS RESERVADOS.</p>
+    </div>
+</footer>
+</body>
+</html>

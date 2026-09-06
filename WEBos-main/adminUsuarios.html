@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar usuarios | Facture Sneakers</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/adminCRUD.css">
+</head>
+<body data-navbar="admin">
+    <main class="admin-page">
+        <header class="admin-header">
+            <div>
+                <p class="eyebrow">Panel de control</p>
+                <h1>Usuarios</h1>
+                <p class="admin-intro">Administra las cuentas registradas en la tienda.</p>
+            </div>
+            <a class="back-link" href="admin.html">Volver al panel</a>
+        </header>
+
+        <section id="users-admin" class="admin-layout users-admin" aria-label="Administración de usuarios">
+            <form id="user-form" class="product-form" novalidate>
+                <div class="form-heading">
+                    <div>
+                        <p class="eyebrow">Ficha de usuario</p>
+                        <h2 id="user-form-title">Nuevo usuario</h2>
+                    </div>
+                    <button id="cancel-user-edit" class="button button-ghost hidden" type="button">Cancelar</button>
+                </div>
+                <input id="user-id" type="hidden">
+                <label for="nombreCompleto">Nombre completo <span>*</span></label>
+                <input id="nombreCompleto" type="text" maxlength="120" required>
+                <label for="email">Correo <span>*</span></label>
+                <input id="email" type="email" maxlength="120" required>
+                <label for="contrasena">Contraseña <span>*</span></label>
+                <input id="contrasena" type="password" maxlength="10" autocomplete="new-password">
+                <div class="form-row">
+                    <div>
+                        <label for="numero">Teléfono</label>
+                        <input id="numero" type="tel" maxlength="30">
+                    </div>
+                    <div>
+                        <label for="region">Región</label>
+                        <input id="region" type="text" maxlength="80">
+                    </div>
+                </div>
+                <label for="comuna">Comuna</label>
+                <input id="comuna" type="text" maxlength="80">
+                <button class="button button-primary" type="submit" id="user-submit-button">Guardar usuario</button>
+                <p id="user-form-message" class="form-message" role="status"></p>
+            </form>
+
+            <section class="products-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">Cuentas registradas</p>
+                        <h2>Listado de usuarios</h2>
+                    </div>
+                    <button id="refresh-users" class="button button-ghost" type="button">Actualizar</button>
+                </div>
+                <p id="users-table-message" class="table-message" role="status">Cargando usuarios...</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Usuario</th><th>Contacto</th><th>Ubicación</th><th class="actions-column">Acciones</th></tr></thead>
+                        <tbody id="users-table-body"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script src="js/adminUsuarios.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

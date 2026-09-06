@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel administrador | Facture Sneakers</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/adminCRUD.css">
+</head>
+<body data-navbar="admin">
+    <main class="admin-page admin-home">
+        <header class="admin-header">
+            <div>
+                <p class="eyebrow">Panel de control</p>
+                <h1>Administración</h1>
+                <p class="admin-intro">Selecciona un área para administrar la tienda.</p>
+            </div>
+            <a class="back-link" href="index.html">Volver a la tienda</a>
+        </header>
+
+        <section class="admin-options" aria-label="Áreas de administración">
+            <a class="admin-option" href="adminProductos.html">
+                <span class="admin-option-number">01</span>
+                <span class="eyebrow">Catálogo</span>
+                <strong>Gestionar productos</strong>
+                <span class="admin-option-description">Crea, edita y elimina las zapatillas del inventario.</span>
+                <span class="admin-option-arrow" aria-hidden="true">&#8594;</span>
+            </a>
+            <a class="admin-option" href="adminUsuarios.html">
+                <span class="admin-option-number">02</span>
+                <span class="eyebrow">Clientes</span>
+                <strong>Gestionar usuarios</strong>
+                <span class="admin-option-description">Administra las cuentas registradas en la tienda.</span>
+                <span class="admin-option-arrow" aria-hidden="true">&#8594;</span>
+            </a>
+        </section>
+    </main>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar productos | Facture Sneakers</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/adminCRUD.css">
+</head>
+<body data-navbar="admin">
+    <main class="admin-page">
+        <header class="admin-header">
+            <div>
+                <p class="eyebrow">Panel de control</p>
+                <h1>Productos</h1>
+                <p class="admin-intro">Administra el inventario de zapatillas de la tienda.</p>
+            </div>
+            <a class="back-link" href="admin.html">Volver al panel</a>
+        </header>
+
+        <section id="products-admin" class="admin-layout" aria-label="Administración de productos">
+            <form id="product-form" class="product-form" novalidate>
+                <div class="form-heading">
+                    <div>
+                        <p class="eyebrow">Ficha de producto</p>
+                        <h2 id="form-title">Nueva zapatilla</h2>
+                    </div>
+                    <button id="cancel-edit" class="button button-ghost hidden" type="button">Cancelar</button>
+                </div>
+                <input id="product-id" type="hidden">
+                <label for="nombreModelo">Nombre del modelo <span>*</span></label>
+                <input id="nombreModelo" name="nombreModelo" type="text" maxlength="120" required>
+                <div class="form-row">
+                    <div>
+                        <label for="tipoCategoria">Categoría <span>*</span></label>
+                        <select id="tipoCategoria" name="tipoCategoria" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Nike Sports">Nike Sports</option>
+                            <option value="Nike Urban">Nike Urban</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="precio">Precio (CLP) <span>*</span></label>
+                        <input id="precio" name="precio" type="number" min="0" step="1" required>
+                    </div>
+                </div>
+                <label for="linkImagen">Ruta o URL de la imagen <span>*</span></label>
+                <input id="linkImagen" name="linkImagen" type="text" placeholder="img/re1.png o https://..." required>
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="4" maxlength="500"></textarea>
+                <div class="sizes-heading">
+                    <div>
+                        <label class="sizes-label">Tallas y stock <span>*</span></label>
+                        <p class="field-help">Define cuántas unidades hay disponibles para cada talla.</p>
+                    </div>
+                    <button id="add-size" class="button button-ghost" type="button">+ Añadir talla</button>
+                </div>
+                <div id="sizes-list" class="sizes-list" aria-live="polite"></div>
+                <p id="sizes-message" class="form-message error" role="alert"></p>
+                <button class="button button-primary" type="submit" id="submit-button">Guardar producto</button>
+                <p id="form-message" class="form-message" role="status"></p>
+            </form>
+
+            <section class="products-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">Inventario actual</p>
+                        <h2>Listado de zapatillas</h2>
+                    </div>
+                    <button id="refresh-products" class="button button-ghost" type="button">Actualizar</button>
+                </div>
+                <p id="table-message" class="table-message" role="status">Cargando productos...</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th class="actions-column">Acciones</th></tr></thead>
+                        <tbody id="products-table-body"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script src="js/adminProductos.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

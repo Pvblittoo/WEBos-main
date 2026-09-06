@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del producto</title>
+    <!-- Bootstrap 5 CSS para la navegación -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Archivo de estilos personal -->
+    <link rel="stylesheet" href="css/detalle.css">
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN (Tomado de tu código) -->
+    <nav class="navbar navbar-expand-lg custom-nav">
+      <div class="container-fluid p-0 d-flex align-items-center justify-content-between">
+        
+        <a class="navbar-brand ms-4" href="index.html">
+          <!-- Asegúrate de que la ruta del logo sea correcta -->
+          <img src="img/logo/logoo.png" alt="Logo" height="40">
+        </a>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav me-3">
+            <li class="nav-item"><a class="nav-link" href="portada.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active" href="index.html">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+            <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+            <li class="nav-item" id="nav-login-item"><a class="nav-link" href="acceso.html">Iniciar Sesión</a></li>
+            <!-- Menú de usuario desplegable (oculto por defecto) -->
+            <li class="nav-item dropdown d-none" id="nav-user-dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Mi Cuenta
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    <li><a class="dropdown-item" href="#" id="logout-btn">Cerrar Sesión</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+
+        <a href="cart.html" class="cart-section me-4">
+          <i class="bi bi-cart3 me-2"></i> Cart (0)
+        </a>
+
+      </div>
+    </nav>
+
+    <!-- SECCIÓN PRINCIPAL DEL PRODUCTO (Diseño basado en la imagen) -->
+    <main class="product-hero">
+        
+        <!-- Columna Izquierda: Información -->
+        <div class="product-info">
+            <h1 class="brand-name" id="product-brand">Jordan</h1>
+            <h2 class="product-title" id="product-title">Cargando producto...</h2>
+            
+            <p class="description" id="product-description">Estamos cargando la información del producto.</p>
+            
+            <div class="purchase-area">
+                <span class="price" id="product-price"></span>
+                <a href="compra.html" class="btn-buy" id="buy-button">Comprar Ahora</a>
+                <a href="javascript:history.back()" class="btn-back">volver atras</a>
+            </div>
+            
+            
+        </div>
+
+        <!-- Columna Derecha: Imagen y Fondo Animado/Gráfico -->
+        <div class="product-display">
+            <!-- Gráfico de líneas dinámicas de fondo (SVG inline) -->
+            <svg class="abstract-lines" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF3333;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff9900;stop-opacity:0" />
+                    </linearGradient>
+                </defs>
+                <path d="M50,250 C150,50 350,50 450,250 C350,450 150,450 50,250 Z" stroke="url(#grad1)" stroke-width="2" fill="none" />
+                <path d="M70,250 C160,80 340,80 430,250 C340,420 160,420 70,250 Z" stroke="url(#grad1)" stroke-width="1.5" fill="none" />
+                <path d="M90,250 C170,110 330,110 410,250 C330,390 170,390 90,250 Z" stroke="url(#grad1)" stroke-width="1.2" fill="none" opacity="0.8"/>
+                <path d="M110,250 C180,140 320,140 390,250 C320,360 180,360 110,250 Z" stroke="url(#grad1)" stroke-width="1" fill="none" opacity="0.6"/>
+                <path d="M130,250 C190,170 310,170 370,250 C310,330 190,330 130,250 Z" stroke="url(#grad1)" stroke-width="0.8" fill="none" opacity="0.4"/>
+            </svg>
+            
+            <!-- Imagen principal de la zapatilla -->
+            <img src="img/re1.png" alt="Producto" class="main-shoe-img" id="product-image">
+        </div>
+
+    </main>
+
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/detalle.js"></script>
+
+    <script src="js/session.js"></script>
+    <script src="js/navbar.js"></script>
+</body>
+</html>

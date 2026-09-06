@@ -1,0 +1,238 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b101e;
+    /* Patrón de cuadrícula como en la imagen */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.checkout-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ==========================================
+   TÍTULOS
+   ========================================== */
+.header-titles {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-titles h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.header-titles p {
+    color: #00d2ff;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ==========================================
+   TARJETA 3D
+   ========================================== */
+.card-container {
+    width: 100%;
+    max-width: 340px;
+    height: 215px;
+    perspective: 1000px; /* Necesario para el efecto 3D */
+    margin-bottom: 25px;
+    z-index: 2;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Oculta la cara que no está mirando al frente */
+    border-radius: 15px;
+    background: linear-gradient(135deg, #7b2cbf 0%, #3a0ca3 50%, #4361ee 100%);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* FRONTAL */
+.card-logo {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-style: italic;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.chip-icon {
+    width: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.card-number {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card-details div {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 3px;
+}
+
+/* TRASERA */
+.card-back {
+    transform: rotateY(180deg);
+    padding: 0;
+}
+
+.magnetic-stripe {
+    width: 100%;
+    height: 45px;
+    background-color: #000000;
+    margin-top: 25px;
+}
+
+.signature-area {
+    padding: 0 20px;
+    margin-top: 15px;
+}
+
+.signature-area span {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.8);
+    display: block;
+    margin-bottom: 3px;
+}
+
+.signature-box {
+    background-color: #ffffff;
+    height: 35px;
+    width: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+}
+
+#card-cvv-display {
+    color: #000;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+.cvv-info {
+    font-size: 0.6rem;
+    padding: 0 20px;
+    margin-top: 10px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* ==========================================
+   FORMULARIO
+   ========================================== */
+.payment-form {
+    background-color: #1a1f2e;
+    width: 100%;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    background-color: #0f1423;
+    border: 1px solid #2a3143;
+    color: #ffffff;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus, .input-group select:focus {
+    border-color: #4361ee;
+}
+
+.row-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.select-group {
+    flex: 1;
+}
+
+.cvv-group {
+    flex: 1.2;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #9d4edd 0%, #ff006e 100%);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 0, 110, 0.5);
+}
