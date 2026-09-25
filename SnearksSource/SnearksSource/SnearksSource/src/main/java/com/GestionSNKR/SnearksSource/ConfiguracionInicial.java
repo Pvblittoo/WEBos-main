@@ -54,7 +54,16 @@ public class ConfiguracionInicial {
                         new Producto(null, 199000, "Mercurial Superfly 11 Elite SE", "Nike", "img/imgsp/e2.png", "Nike Sports", inventarioBase()),
                         new Producto(null, 210000, "Phantom 6 Low Elite \"Alexia Putellas\"", "Nike", "img/imgsp/f1 (1).png", "Nike Sports", inventarioBase()),
                         new Producto(null, 230000, "Mercurial Superfly 11 Elite", "Nike", "img/imgsp/g1.png", "Nike Sports", inventarioBase()),
-                        new Producto(null, 250000, "United Tiempo Maestro Academy", "Nike", "img/imgsp/h1.png", "Nike Sports", inventarioBase())
+                        new Producto(null, 250000, "United Tiempo Maestro Academy", "Nike", "img/imgsp/h1.png", "Nike Sports", inventarioBase()),
+                        new Producto(null, 250000, "Nike Field General Navy", "Nike", "img/urban/NikeField.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "Nike M2K Tekno White", "Nike", "img/urban/NikeM2K.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "nike shox TL", "Nike", "img/urban/nikeUrban.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "Nike Air Max 90", "Nike", "img/urban/90.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "Nike Air Max 1", "Nike", "img/urban/air.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "Nike Air Max Plus (TN)", "Nike", "img/urban/tn.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "Nike Blazer Mid '77 Vintage", "Nike", "img/urban/blazer.png", "Nike Urban", inventarioBase()),
+                        new Producto(null, 250000, "Nike Full Force Low", "Nike", "img/urban/ful.png", "Nike Urban", inventarioBase())
+
                 );
 
                 productoRepository.saveAll(zapatillas);
