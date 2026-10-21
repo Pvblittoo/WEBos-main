@@ -1,0 +1,239 @@
+/* ==========================================
+   THE SNEAKER EDITORIAL - THEME
+   ========================================== */
+
+/* Variables locales para mantener la paleta Bulls */
+
+/* Agrega esto al principio de css/blogs.css */
+/* Agrega esto al inicio de css/blogs.css */
+body {
+    background: linear-gradient(135deg, #000000 0%, #000000 50%, #FF0033 50%, #FF0033 100%) !important;
+    background-image: linear-gradient(135deg, #000000 0%, #000000 50%, #FF0033 50%, #FF0033 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+:root {
+  --bulls-red: #FF0033;
+  --dark-bg: #111111;
+  --darker-border: #222222;
+  --text-light: #ffffff;
+  --text-muted: #a9a9a9;
+}
+
+/* Header de la sección */
+.editorial-header {
+  text-align: center;
+  padding: 50px 20px 30px;
+  background: linear-gradient(180deg, rgba(17,17,17,0.8) 0%, rgba(5,5,5,0) 100%);
+}
+
+.editorial-header h1 {
+  color: var(--bulls-red);
+  font-size: 3rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 0 10px 0;
+}
+
+.editorial-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Contenedor principal de los artículos */
+.editorial-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Separación amplia entre cada artículo */
+}
+
+/* ------------------------------------------
+   TARJETA HORIZONTAL TIPO REVISTA
+   ------------------------------------------ */
+.news-card {
+  display: flex;
+  background-color: var(--dark-bg);
+  border: 1px solid var(--darker-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--bulls-red);
+  box-shadow: 0 15px 40px rgba(255, 0, 51, 0.15);
+}
+
+/* Contenedor de la Imagen (Izquierda) */
+.news-image-wrapper {
+  width: 45%; /* Ocupa casi la mitad de la tarjeta */
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.news-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.news-card:hover .news-image-wrapper img {
+  transform: scale(1.08); /* Efecto zoom sutil al pasar el mouse */
+}
+
+/* Etiqueta flotante sobre la imagen */
+.news-category {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--bulls-red);
+  color: #fff;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+/* Contenedor de Texto (Derecha) */
+.news-content {
+  width: 55%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-meta {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.news-title {
+  color: var(--text-light);
+  font-size: 2rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0 0 15px 0;
+  transition: color 0.3s ease;
+}
+
+.news-card:hover .news-title {
+  color: var(--bulls-red);
+}
+
+.news-excerpt {
+  color: #cccccc;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Botón fantasma (Ghost Button) */
+.news-btn {
+  align-self: flex-start;
+  background-color: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--text-light);
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.news-btn .arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.news-btn:hover {
+  background-color: var(--text-light);
+  color: var(--dark-bg);
+}
+
+.news-btn:hover .arrow {
+  transform: translateX(6px); /* La flecha se mueve a la derecha */
+}
+
+/* ------------------------------------------
+   ESTADOS DE CARGA Y ERROR
+   ------------------------------------------ */
+.loading-box h3, .empty-state h2 {
+  color: var(--text-light);
+  font-style: italic;
+  font-weight: bold;
+}
+
+.error-box {
+  background-color: rgba(255, 0, 51, 0.1);
+  border: 1px solid var(--bulls-red);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.error-box h3 {
+  color: var(--bulls-red);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* ------------------------------------------
+   RESPONSIVE (MÓVILES Y TABLETS)
+   ------------------------------------------ */
+@media (max-width: 768px) {
+  .news-card {
+    flex-direction: column; /* Apila la imagen arriba y el texto abajo */
+  }
+  
+  .news-image-wrapper {
+    width: 100%;
+    height: 250px; /* Altura fija para la imagen en móvil */
+  }
+  
+  .news-content {
+    width: 100%;
+    padding: 25px 20px;
+  }
+  
+  .editorial-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .news-title {
+    font-size: 1.6rem;
+  }
+}

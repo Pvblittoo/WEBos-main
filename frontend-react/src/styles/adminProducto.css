@@ -1,0 +1,217 @@
+
+.admin-productos {
+  min-height: 100vh;
+  padding: 60px 6% 90px;
+  background: #080808;
+  color: white;
+}
+
+.admin-productos-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.admin-productos-header > p:first-child {
+  color: #ff1744;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.admin-productos-header h1 {
+  font-size: clamp(32px, 5vw, 55px);
+  font-weight: 900;
+  margin: 20px 0;
+}
+
+.admin-productos-header h1 span {
+  color: #ff1744;
+}
+
+.admin-productos-header > p:last-child {
+  color: #aaa;
+}
+
+.admin-productos-panel {
+  max-width: 1200px;
+  margin: 0 auto 35px;
+  padding: 35px;
+  background: #171717;
+  border: 1px solid #333;
+  border-radius: 14px;
+}
+
+.admin-productos-panel h2 {
+  font-size: 25px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.admin-productos-panel h3 {
+  font-size: 17px;
+  margin: 25px 0 15px;
+}
+
+.admin-productos-campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-productos label {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-productos input,
+.admin-productos select,
+.admin-productos textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  color: white;
+  background: #0b0b0b;
+  border: 1px solid #444;
+  border-radius: 6px;
+  outline: none;
+  font: inherit;
+}
+
+.admin-productos input:focus,
+.admin-productos select:focus,
+.admin-productos textarea:focus {
+  border-color: #ff1744;
+}
+
+.admin-productos-descripcion {
+  margin-top: 20px;
+}
+
+.admin-productos-tallas {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.admin-productos-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.admin-productos button {
+  padding: 12px 20px;
+  background: #ff1744;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-productos button:hover {
+  background: #c90030;
+}
+
+.admin-productos button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-productos .admin-productos-cancelar {
+  background: #444;
+}
+
+.admin-productos .admin-productos-eliminar {
+  background: #752034;
+}
+
+.admin-productos-exito {
+  margin-top: 20px;
+  color: #76e0a1;
+}
+
+.admin-productos-error {
+  margin-top: 20px;
+  color: #ff819b;
+}
+
+.admin-productos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-productos-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 18px;
+  background: #202020;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.admin-productos-item img,
+.admin-productos-sin-imagen {
+  width: 125px;
+  height: 105px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 7px;
+  background: #303030;
+}
+
+.admin-productos-sin-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.admin-productos-detalle {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-productos-detalle h3 {
+  margin: 0 0 10px;
+}
+
+.admin-productos-detalle p {
+  margin: 6px 0;
+  color: #bbb;
+}
+
+.admin-productos-detalle strong {
+  color: #ff1744;
+}
+
+.admin-productos-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 800px) {
+  .admin-productos-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-productos-tallas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .admin-productos-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-productos-panel {
+    padding: 22px;
+  }
+}

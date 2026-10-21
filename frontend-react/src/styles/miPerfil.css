@@ -1,0 +1,159 @@
+
+.perfil-pagina {
+  min-height: 80vh;
+  background: #080808;
+  color: #fff;
+  padding: 65px 20px;
+}
+
+.perfil-contenedor {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.perfil-etiqueta {
+  color: #ff1744;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.perfil-contenedor h1 {
+  text-align: center;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900;
+  margin: 20px 0;
+}
+
+.perfil-contenedor h1 span {
+  color: #ff1744;
+}
+
+.perfil-subtitulo {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+.perfil-tarjeta {
+  background: #171717;
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 35px;
+}
+
+.perfil-encabezado {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #333;
+}
+
+.perfil-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: #321018;
+  font-size: 35px;
+}
+
+.perfil-encabezado h2 {
+  margin: 0 0 7px;
+  font-size: 26px;
+}
+
+.perfil-encabezado p {
+  color: #ff1744;
+  margin: 0;
+}
+
+.perfil-datos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  padding: 35px 0;
+}
+
+.perfil-campo {
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.perfil-campo label {
+  display: block;
+  color: #999;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.perfil-campo p {
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.perfil-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.perfil-acciones a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 8px;
+  background: #d71920;
+  color: white;
+  font-weight: 800;
+  transition: 0.2s;
+}
+
+.perfil-acciones a:hover {
+  background: #ff1744;
+  color: white;
+}
+
+.perfil-acciones a:last-child {
+  background: transparent;
+  border: 1px solid #ff1744;
+  color: #ff1744;
+}
+
+.perfil-acciones a:last-child:hover {
+  background: #ff1744;
+  color: white;
+}
+
+.perfil-error {
+  text-align: center;
+  color: #ff6b6b;
+}
+
+@media (max-width: 600px) {
+  .perfil-tarjeta {
+    padding: 20px;
+  }
+
+  .perfil-datos {
+    grid-template-columns: 1fr;
+  }
+
+  .perfil-encabezado h2 {
+    font-size: 21px;
+  }
+
+  .perfil-acciones {
+    flex-direction: column;
+  }
+}

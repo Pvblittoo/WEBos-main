@@ -1,0 +1,131 @@
+#site-navbar {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    background: #0d0d0d;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.site-navbar-inner {
+    min-height: 76px;
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.site-navbar-brand img {
+    display: block;
+    width: auto;
+    height: 40px;
+}
+
+.site-navbar-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 22px;
+}
+
+.site-navbar-menu a,
+.site-navbar-account button {
+    color: #ffffff;
+    background: none;
+    border: 0;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.site-navbar-menu a:hover,
+.site-navbar-menu a.active,
+.site-navbar-account button:hover {
+    color: #ff3333;
+}
+
+.site-navbar-menu a.active {
+    border-bottom: 2px solid #ff3333;
+    padding-bottom: 4px;
+}
+
+.site-navbar-cart {
+    border-left: 1px solid #555;
+    padding-left: 22px;
+}
+
+.site-navbar-toggle {
+    display: none;
+    padding: 8px;
+    border: 1px solid #777;
+    background: transparent;
+}
+
+.site-navbar-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 4px;
+    background: #ffffff;
+}
+
+.site-navbar-account {
+    position: relative;
+}
+
+.site-navbar-account-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    min-width: 160px;
+    padding: 10px;
+    background: #171717;
+    border: 1px solid #444;
+}
+
+.site-navbar-account.is-open .site-navbar-account-menu {
+    display: grid;
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .site-navbar-inner {
+        padding: 12px 20px;
+    }
+
+    .site-navbar-toggle {
+        display: block;
+    }
+
+    .site-navbar-menu {
+        display: none;
+        width: 100%;
+        padding: 16px 0;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .site-navbar-menu.is-open {
+        display: flex;
+    }
+
+    .site-navbar-inner {
+        flex-wrap: wrap;
+    }
+
+    .site-navbar-menu a,
+    .site-navbar-account button {
+        white-space: normal;
+    }
+
+    .site-navbar-cart {
+        border-left: 0;
+        padding-left: 0;
+    }
+}

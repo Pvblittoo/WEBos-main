@@ -1,0 +1,153 @@
+
+.checkout-page {
+  min-height: 80vh;
+  background: #080808;
+  color: white;
+  padding: 60px 20px;
+}
+
+.checkout-box {
+  max-width: 780px;
+  margin: 0 auto;
+  background: #151515;
+  border: 1px solid #333;
+  border-radius: 18px;
+  padding: 35px;
+}
+
+.checkout-box h1 {
+  color: #ff003c;
+  font-size: 36px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.checkout-box h2 {
+  color: #fff;
+  font-size: 22px;
+  margin: 30px 0 20px;
+}
+
+.checkout-productos {
+  display: grid;
+  gap: 15px;
+}
+
+.checkout-producto {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px;
+  background: #202020;
+  border-radius: 10px;
+}
+
+.checkout-producto p {
+  color: #aaa;
+  margin: 8px 0 0;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 25px 0;
+  margin: 25px 0;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+  color: #ff003c;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.checkout-box label {
+  display: block;
+  font-weight: bold;
+  margin: 22px 0 10px;
+}
+
+.checkout-box textarea,
+.checkout-box select {
+  width: 100%;
+  padding: 14px;
+  background: #242424;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: white;
+  font: inherit;
+}
+
+.checkout-box textarea:focus,
+.checkout-box select:focus {
+  outline: 2px solid #ff003c;
+}
+
+.checkout-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+  background: #ff003c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkout-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.checkout-aviso {
+  margin-top: 18px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.checkout-volver {
+  display: block;
+  text-align: center;
+  color: #ddd;
+  margin-top: 25px;
+  text-decoration: none;
+}
+
+.checkout-error {
+  color: #ff5555;
+  margin: 15px 0;
+}
+
+.checkout-exito {
+  text-align: center;
+}
+
+.checkout-icono {
+  display: grid;
+  place-items: center;
+  width: 85px;
+  height: 85px;
+  margin: 0 auto 20px;
+  border: 3px solid #00e676;
+  border-radius: 50%;
+  color: #00e676;
+  font-size: 48px;
+}
+
+@media (max-width: 600px) {
+  .checkout-box {
+    padding: 22px;
+  }
+
+  .checkout-box h1 {
+    font-size: 28px;
+  }
+
+  .checkout-producto {
+    flex-direction: column;
+  }
+}

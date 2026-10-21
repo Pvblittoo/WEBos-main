@@ -1,0 +1,301 @@
+/* ==========================================
+   RESET BÁSICO
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    /* Fondo diagonal cortado (Gris Oscuro a Rojo Vibrante) */
+    background: linear-gradient(108deg, #26272b 62%, #ea3b47 62.1%);
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================
+   NAVEGACIÓN
+   ========================================== */
+.custom-nav {
+    background-color: transparent !important;
+    padding: 20px 4%; /* Reducido para pegar el menú más arriba */
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.custom-nav .nav-link {
+    color: #a0a0a0 !important;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 12px;
+    transition: color 0.3s ease;
+}
+
+.custom-nav .nav-link:hover, 
+.custom-nav .nav-link.active {
+    color: #ffffff !important;
+}
+
+.cart-section {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+.cart-section:hover {
+    color: #ea3b47;
+}
+
+/* ==========================================
+   DISEÑO PRINCIPAL DEL PRODUCTO (HERO)
+   ========================================== */
+.product-hero {
+    display: flex;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    /* Reducimos el alto mínimo y el padding superior para subir todo el bloque */
+    min-height: 80vh; 
+    padding: 100px 6% 20px; 
+    align-items: flex-start; /* Alinea los elementos hacia arriba en lugar de centrarlos */
+    justify-content: space-between;
+    position: relative;
+    margin-top: 5vh; /* Ajuste fino de la altura general */
+}
+
+/* ==========================================
+   COLUMNA IZQUIERDA (TEXTO REORGANIZADO)
+   ========================================== */
+/* ==========================================
+   COLUMNA IZQUIERDA (ESTILO CARD)
+   ========================================== */
+.product-info {
+    width: 45%;
+    max-width: 500px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    /* Efecto Card / Tarjeta */
+    background: rgba(38, 39, 43, 0.6); /* Fondo oscuro translúcido */
+    backdrop-filter: blur(15px); /* Efecto cristal */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde sutil brillante */
+}
+
+/* 'display: contents' para poder reordenar los elementos del div hijo */
+.purchase-area {
+    display: contents; 
+}
+
+/* 1. Precio */
+.price {
+    order: 1;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* 2. Título del Producto */
+.product-title {
+    order: 2;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #ffffff; 
+    line-height: 1.1;
+    margin-bottom: 0;
+    background: none; 
+    -webkit-text-fill-color: #ffffff;
+}
+
+/* 3. Estrellas inyectadas debajo del título */
+
+.product-title::after {
+    content: "\2605 \2605 \2605 \2605 \2605";
+    display: block;
+    color: #FFD700 !important; /* Obliga a que el color sea amarillo */
+    font-size: 1.1rem;
+    margin-top: 15px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); /* Añade un resplandor amarillo sutil */
+}
+
+/* 4. Descripción / Marca (Texto debajo de las estrellas) */
+.description {
+    order: 3;
+    font-size: 0.95rem;
+    color: #a5a5a5;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    max-width: 100%;
+}
+
+/* Ocultamos el título de marca original para no duplicar */
+.brand-name {
+    display: none; 
+}
+
+/* 5. Botón de Compra */
+.btn-buy {
+    order: 4;
+    background-color: #ea3b47;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 14px 35px;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(234, 59, 71, 0.3);
+}
+
+.btn-buy:hover {
+    background-color: #d82b36;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(234, 59, 71, 0.5);
+    color: white;
+}
+/* ==========================================
+   COLUMNA DERECHA (IMAGEN Y GRÁFICO)
+/* ==========================================
+   COLUMNA DERECHA (TARJETA IDÉNTICA)
+   ========================================== */
+/* ==========================================
+   COLUMNA DERECHA (TARJETA DE IMAGEN SOLA)
+   ========================================== */
+.product-display {
+    width: 45% !important;
+    max-width: 500px !important;
+    min-height: 450px !important;
+    position: relative;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    /* Fondo oscuro sólido estilo tarjeta */
+    background-color: #121212 !important; 
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+    padding: 30px !important;
+    
+    /* BLOQUEO FINAL: Oculta cualquier parte de la imagen que intente salirse */
+    overflow: hidden !important; 
+}
+
+/* Efecto de resplandor (glow) detrás de la zapatilla */
+.product-display::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 40%;
+    background: rgba(255, 255, 255, 0.15); /* Luz blanca sutil */
+    filter: blur(50px);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+/* Ocultar el SVG de las líneas de fondo originales por completo */
+.abstract-lines {
+    display: none !important;
+}
+
+/* Imagen de la zapatilla estrictamente contenida */
+.main-shoe-img {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 90% !important; /* Deja un margen para que no toque los bordes */
+    max-width: 380px !important; /* Tope máximo de crecimiento */
+    height: auto !important;
+    margin: 0 !important;
+    
+    /* Alineación perfecta al centro, con rotación suave */
+    transform: rotate(-10deg) translate(0, 0) !important; 
+    filter: drop-shadow(0 20px 15px rgba(0, 0, 0, 0.8)) !important;
+    pointer-events: none !important;
+}
+
+/* ==========================================
+   RESPONSIVE (Móviles y Tablets)
+   ========================================== */
+@media (max-width: 992px) {
+    .product-display {
+        width: 100%;
+        margin-bottom: 30px;
+        padding: 30px;
+    }
+    
+    .main-shoe-img {
+        transform: rotate(0deg) !important; /* Endereza la zapatilla en móviles */
+    }
+}
+
+
+
+
+/* ==========================================
+   BOTÓN DE VOLVER ATRÁS
+   ========================================== */
+.btn-back {
+    order: 6; /* Lo envía debajo del botón de comprar */
+    background-color: transparent;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 14px 35px;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 15px; /* Lo separa del botón rojo */
+    text-align: center;
+    width: fit-content;
+}
+
+.btn-back:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+
+/* 1. Contenedor principal: Obliga a ambas tarjetas a tener la misma altura */
+.product-hero {
+    align-items: stretch !important;
+}
+
+/* 2. Tarjeta izquierda (Texto): Centra el contenido verticalmente en el nuevo espacio */
+.product-info {
+    justify-content: center !important;
+}
+
+/* 3. Tarjeta derecha (Imagen): Elimina alturas mínimas para que no sea más grande que la izquierda */
+.product-display {
+    min-height: auto !important;
+}

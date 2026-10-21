@@ -1,0 +1,39 @@
+
+.colecciones-react .brand-card {
+  min-height: 400px;
+  border: 2px solid #222;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.colecciones-react .brand-card:hover {
+  transform: translateY(-5px);
+  border-color: #CE1141;
+}
+
+.colecciones-react .brand-card img {
+  width: 75%;
+  height: 200px;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.colecciones-react .text-bulls-red {
+  color: #CE1141 !important;
+}
+
+.colecciones-react .btn-bulls {
+  background-color: #CE1141;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.colecciones-react .btn-bulls:hover {
+  background-color: #a00d32;
+  color: white;
+}

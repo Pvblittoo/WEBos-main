@@ -1,0 +1,66 @@
+:root { --admin-red: #e51c3e; --admin-red-dark: #a50f2a; --admin-ink: #121212; --admin-muted: #6f6f6f; --admin-line: #dedede; --admin-surface: #fff; --admin-bg: #f2f1ee; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--admin-ink); background: var(--admin-bg); font-family: Arial, sans-serif; }
+.admin-page { max-width: 1440px; margin: 0 auto; padding: 54px 5vw 80px; }
+.admin-header, .panel-heading, .form-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.eyebrow { margin: 0 0 8px; color: var(--admin-red); font-size: .72rem; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; }
+h1, h2, p { margin-top: 0; }
+h1 { margin-bottom: 10px; font-size: clamp(2.3rem, 5vw, 4.5rem); letter-spacing: -1px; text-transform: uppercase; }
+h2 { margin-bottom: 24px; font-size: 1.35rem; }
+.admin-intro { color: var(--admin-muted); }
+.back-link { color: var(--admin-ink); font-size: .85rem; font-weight: 700; text-transform: uppercase; text-decoration: none; }
+.back-link:hover { color: var(--admin-red); }
+.admin-layout { display: grid; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: 28px; margin-top: 42px; }
+.users-admin { margin-top: 56px; }
+.admin-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 56px; }
+.admin-option { position: relative; display: flex; min-height: 300px; flex-direction: column; padding: 30px; border: 1px solid var(--admin-line); background: var(--admin-surface); color: var(--admin-ink); text-decoration: none; transition: border-color .2s ease, transform .2s ease; }
+.admin-option:hover { border-color: var(--admin-red); transform: translateY(-4px); }
+.admin-option .eyebrow { margin-top: auto; }
+.admin-option strong { max-width: 360px; margin-top: 6px; font-size: clamp(1.8rem, 4vw, 3.2rem); line-height: 1; text-transform: uppercase; }
+.admin-option-description { max-width: 360px; margin-top: 18px; color: var(--admin-muted); line-height: 1.5; }
+.admin-option-number { position: absolute; top: 26px; right: 30px; color: var(--admin-red); font-size: .8rem; font-weight: 800; letter-spacing: 1px; }
+.admin-option-arrow { margin-top: 30px; color: var(--admin-red); font-size: 2rem; line-height: 1; }
+.product-form, .products-panel { padding: 30px; background: var(--admin-surface); border: 1px solid var(--admin-line); }
+.product-form { align-self: start; }
+.form-heading h2, .panel-heading h2 { margin-bottom: 0; }
+label { display: block; margin: 20px 0 8px; font-size: .82rem; font-weight: 700; }
+label span { color: var(--admin-red); }
+input, select, textarea { width: 100%; padding: 12px 13px; border: 1px solid #c7c7c7; border-radius: 0; background: #fff; color: var(--admin-ink); font: inherit; }
+textarea { resize: vertical; }
+input:focus, select:focus, textarea:focus { outline: 2px solid rgba(229, 28, 62, .25); border-color: var(--admin-red); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.sizes-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.sizes-label { margin: 0 0 5px; }
+.field-help { margin: 0; color: var(--admin-muted); font-size: .75rem; line-height: 1.4; }
+.sizes-heading .button { min-height: 34px; padding: 7px 10px; white-space: nowrap; font-size: .65rem; }
+.sizes-list { display: grid; gap: 8px; margin-top: 12px; }
+.size-row { display: grid; grid-template-columns: 1fr 1fr 34px; gap: 8px; }
+.size-row input { padding: 9px 10px; }
+.remove-size { border: 1px solid var(--admin-line); background: #fff; color: var(--admin-red-dark); cursor: pointer; font-size: 1.25rem; line-height: 1; }
+.remove-size:hover { border-color: var(--admin-red); background: #fff4f5; }
+.stock-summary { display: block; margin-top: 5px; color: var(--admin-muted); font-size: .68rem; font-weight: 400; }
+.form-message.error { min-height: 18px; }
+.button { min-height: 42px; padding: 10px 16px; border: 1px solid transparent; border-radius: 0; cursor: pointer; font-size: .76rem; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; }
+.button-primary { width: 100%; margin-top: 24px; background: var(--admin-red); color: #fff; }
+.button-primary:hover { background: var(--admin-red-dark); }
+.button-ghost { background: transparent; border-color: var(--admin-ink); color: var(--admin-ink); }
+.button-ghost:hover { border-color: var(--admin-red); color: var(--admin-red); }
+.hidden { display: none; }
+.form-message, .table-message { min-height: 20px; margin: 14px 0 0; color: var(--admin-muted); font-size: .85rem; }
+.form-message.error, .table-message.error { color: var(--admin-red-dark); }
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; min-width: 620px; margin-top: 24px; border-collapse: collapse; text-align: left; }
+th { padding: 0 14px 14px; color: var(--admin-muted); font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; }
+td { padding: 15px 14px; border-top: 1px solid var(--admin-line); vertical-align: middle; }
+.product-cell { display: flex; align-items: center; gap: 13px; min-width: 230px; }
+.product-cell img { width: 58px; height: 58px; object-fit: contain; background: #f4f4f4; }
+.product-name { margin: 0; font-weight: 700; }
+.product-id { margin: 4px 0 0; color: var(--admin-muted); font-size: .73rem; }
+.category { color: var(--admin-red-dark); font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+.price { white-space: nowrap; font-weight: 700; }
+.actions { display: flex; gap: 8px; }
+.action-button { padding: 7px 9px; border: 1px solid var(--admin-line); background: #fff; cursor: pointer; font-size: .7rem; font-weight: 700; text-transform: uppercase; }
+.action-button:hover { border-color: var(--admin-red); color: var(--admin-red); }
+.action-button.delete:hover { border-color: var(--admin-red-dark); background: var(--admin-red-dark); color: #fff; }
+@media (max-width: 850px) { .admin-page { padding: 36px 20px 60px; } .admin-layout, .admin-options { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .admin-header, .panel-heading, .form-heading { flex-direction: column; } .form-row { grid-template-columns: 1fr; gap: 0; } .product-form, .products-panel { padding: 22px 16px; } }

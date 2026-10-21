@@ -1,0 +1,220 @@
+
+/* PÁGINA NIKE URBAN */
+.nike-urban-page {
+  background-color: #050505;
+  color: #ffffff;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  overflow: hidden;
+}
+
+/* TÍTULOS ORIGINALES */
+.nike-urban-page .titulo-tienda {
+  text-align: center;
+  padding: 30px 20px 10px;
+  margin-bottom: 35px;
+}
+
+.nike-urban-page .titulo-tienda h1 {
+  color: #ff0033 !important;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 2.5rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* CARRUSEL INFINITO */
+.nike-urban-page .infinite-carousel {
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  padding: 15px 0;
+}
+
+.nike-urban-page .carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scrollInfinito 25s linear infinite;
+}
+
+.nike-urban-page .carousel-track img {
+  height: 120px;
+  margin: 0 25px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+@keyframes scrollInfinito {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* GRILLA DE PRODUCTOS */
+.nike-urban-page .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+  justify-content: center;
+  padding: 0 20px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* TARJETAS */
+.nike-urban-page .card {
+  width: 100%;
+  background-color: #111111 !important;
+  border-radius: 20px;
+  padding: 25px;
+  border: 2px solid #222222;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 0.3s ease;
+}
+
+.nike-urban-page .card:hover {
+  transform: translateY(-8px);
+  border-color: #ff0033;
+  box-shadow: 0 15px 35px rgba(255, 0, 51, 0.3);
+}
+
+/* IMÁGENES DE PRODUCTOS */
+.nike-urban-page .slider {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nike-urban-page .slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.nike-urban-page .slide img {
+  max-width: 200px;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.85));
+}
+
+/* INFORMACIÓN */
+.nike-urban-page .info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.nike-urban-page .code {
+  color: #ffffff !important;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.nike-urban-page .info h2 {
+  color: #ffffff !important;
+  font-size: 1.4rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  margin: 5px 0;
+}
+
+.nike-urban-page .price {
+  color: #ff0033;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: 15px;
+}
+
+/* BOTONES */
+.nike-urban-page .btn-buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 0;
+  background-color: #111111;
+  color: #ff0033 !important;
+  border: 2px solid #ff0033;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.nike-urban-page .btn-buy:hover {
+  background-color: #ff0033;
+  color: #ffffff !important;
+  box-shadow: 0 5px 15px rgba(255, 0, 51, 0.4);
+}
+
+/* ADAPTACIÓN A CELULARES */
+@media (max-width: 768px) {
+  .nike-urban-page .titulo-tienda h1 {
+    font-size: 1.8rem;
+  }
+
+  .nike-urban-page .grid-container {
+    grid-template-columns: 1fr;
+    padding: 0 15px 40px;
+  }
+
+  .nike-urban-page .carousel-track img {
+    height: 90px;
+    margin: 0 15px;
+  }
+}
+
+.nike-urban-page .titulo-tienda h1 {
+  color: #ff0033 !important;
+  text-align: center !important;
+}
+
+.nike-urban-page .infinite-carousel {
+  height: 160px !important;
+}
+
+.nike-urban-page .carousel-track {
+  align-items: center;
+}
+
+.nike-urban-page .webgl-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.nike-urban-page .titulo-tienda,
+.nike-urban-page .infinite-carousel,
+.nike-urban-page .grid-container {
+  position: relative;
+  z-index: 1;
+}
