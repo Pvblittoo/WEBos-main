@@ -117,4 +117,28 @@ public class BoletaService {
                 .filter(b -> b.getCliente() != null && b.getCliente().getId().equals(clienteId))
                 .orElseThrow(() -> new IllegalArgumentException("Boleta no encontrada para ese cliente."));
     }
+
+    public List<Boleta> listarTodas() {
+        return boletaRepository.findAll();
+    }
+
+    public Boleta actualizarEstado(Long boletaId, String nuevoEstado) {
+        Boleta boleta = boletaRepository.findById(boletaId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Pedido no encontrado."));
+
+        if (nuevoEstado == null) {
+            throw new IllegalArgumentException("El estado es obligatorio.");
+        }
+
+        String estado = nuevoEstado.trim().toUpperCase();
+
+        if (!List.of("CREADA", "PAGADA", "ENVIADA").contains(estado)) {
+            throw new IllegalArgumentException("Estado no válido.");
+        }
+
+        boleta.setEstado(estado);
+
+        return boletaRepository.save(boleta);
+    }
 }

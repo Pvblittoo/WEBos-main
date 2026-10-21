@@ -28,7 +28,8 @@ public class Cliente {
     @Column(name = "email", length = 100)
     private String email;
 
-    @Column(name = "contrasena", length = 10)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "contrasena", length = 255, nullable = false)
     private String contrasena;
 
     @Column(name = "numero", length = 9)
@@ -39,6 +40,10 @@ public class Cliente {
 
     @Column(name = "comuna", length = 100)
     private String comuna;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rol", length = 20, nullable = false)
+    private Rol rol = Rol.CLIENTE;
 
 
 
