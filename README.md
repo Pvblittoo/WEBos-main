@@ -57,9 +57,7 @@ Para ejecutarlo:
 
 Una vez iniciado el backend, se puede ejecutar el frontend.
 
-Para probar el proyecto se puede abrir `index.html` directamente desde el navegador.
-Tambien se puede utilizar la extension **Live Server** de Visual Studio Code.
-
+Para probar el proyecto se debe abrir la consola en front react y escribir por consola npm run dev y luego entrar a la url que aparezca en consola, (suele ser http://localhost:5173 por defecto)
 ## Integrantes
 
 Proyecto realizado por estudiantes de Duoc UC.
