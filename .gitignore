@@ -1,0 +1,4 @@
+.idea/
+data/
+*.mv.db
+*.trace.db
