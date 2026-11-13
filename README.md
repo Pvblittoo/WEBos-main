@@ -1,65 +1,70 @@
-# WEBos - Tienda de Zapatillas 👟
+# Facture Sneakers — Frontend (React + Vite) 👟
 
-Este proyecto es una página web de venta de zapatillas desarrollada como trabajo académico.
+Tienda online de zapatillas desarrollada para **DSY1104 Desarrollo Fullstack II** (Duoc UC).
+Este es el **frontend**. El backend Spring Boot está en la rama [`Backend`](https://github.com/Pvblittoo/WEBos-main/tree/Backend).
 
-La página cuenta con diferentes secciones donde se pueden ver productos, revisar detalles de las zapatillas, iniciar sesión, registrarse y utilizar un carrito de compras.
+## Tecnologías
 
-## Tecnologías utilizadas
+React 19, React Router 7, Bootstrap 5 y Vite.
 
-* HTML
-* CSS
-* JavaScript
+## Requisitos
 
-## Estructura del proyecto
+- Node.js 20 o superior
+- Backend corriendo en `http://localhost:8080`
 
-El proyecto está separado principalmente en:
+## Cómo ejecutar
 
-* `index.html`: página principal.
-* `login.html`: inicio de sesión.
-* `registro.html`: registro de usuarios.
-* `carrito.html`: carrito de compras.
-* `detalle.html`: detalle de los productos.
-* `contacto.html`: página de contacto.
-* `nosotros.html`: información sobre la tienda.
-* `admin.html`: sección de administración.
-* `css/`: contiene los estilos de las páginas.
-* `js/`: contiene las funciones de JavaScript.
-* `img/`: contiene las imágenes utilizadas en la página.
-* `backend`: contiene el backend del proyecto.
+```bash
+cd frontend-react
+npm install
+npm run dev
+```
 
-## Funciones principales
+Abrir `http://localhost:5173`.
 
-La página permite:
+Si el backend corre en otra dirección, crear un archivo `.env` dentro de `frontend-react` con:
 
-* Ver diferentes zapatillas.
-* Buscar y revisar productos.
-* Ver información de cada zapatilla.
-* Agregar productos al carrito.
-* Iniciar sesión.
-* Registrar usuarios.
-* Realizar una compra.
-* Acceder a funciones de administración.
+```
+VITE_API_URL=http://otra-direccion:8080
+```
 
-## Cómo ejecutar el proyecto
+## Estructura
 
-Para ejecutar correctamente el proyecto se debe iniciar el backend y luego el frontend.
+```
+frontend-react/src
+├── api.js                     # Cliente HTTP central: token JWT, renovación automática y errores
+├── App.jsx                    # Rutas, restauración de sesión y cierre de sesión
+├── components/
+│   ├── Navbar.jsx             # Menú según sesión y rol (opciones ADMIN ocultas a clientes)
+│   └── RutaProtegida.jsx      # Guardia de rutas por sesión y por rol
+└── pages/                     # Catálogo, detalle, carrito, checkout, pedidos, perfil y panel admin
+```
 
-## Backend
-El backend del proyecto se encuentra en la carpte `master`.
+## Integración con el backend
 
-Para ejecutarlo:
-1. Abrir la carpeta `master` en **Intellij IDEA**.
-2. Esperar a que Intellij cargue el proyecto y sus dependencias.
-3. Ejecutar el backend desde Intellij IDEA.
-4. Esperar a que el servidor se inicie correctamente.
+Todas las páginas se comunican con la API REST a través de `apiFetch` (en `api.js`), que:
 
-## Frontend
+1. Agrega el header `Authorization: Bearer <token>` a cada petición.
+2. Si el backend responde 401 porque el token expiró, pide uno nuevo a `/api/clientes/refresh` y repite la petición automáticamente.
+3. Si la sesión ya no se puede renovar, cierra la sesión local y avisa a la aplicación.
 
-Una vez iniciado el backend, se puede ejecutar el frontend.
+## Gestión de sesión
 
-Para probar el proyecto se puede abrir `index.html` directamente desde el navegador.
-Tambien se puede utilizar la extension **Live Server** de Visual Studio Code.
+- El **accessToken (JWT)** se guarda **solo en memoria**, nunca en `localStorage` ni en `sessionStorage`, para que un script malicioso no pueda robarlo.
+- El **refreshToken** lo guarda el navegador en una cookie **HttpOnly** que JavaScript no puede leer.
+- Al **recargar la página**, `App.jsx` restaura la sesión pidiendo un token nuevo con esa cookie, así que el usuario sigue conectado.
+- Al **cerrar sesión**, el backend revoca todos los tokens del usuario.
 
-## Integrantes
+## Restricciones de acceso
 
-Proyecto realizado por estudiantes de Duoc UC.
+| Ruta | Requisito |
+|---|---|
+| `/admin`, `/admin/productos`, `/admin/pedidos`, `/admin/usuarios` | Rol **ADMIN** |
+| `/checkout`, `/compra-exitosa`, `/mis-pedidos`, `/mi-perfil` | Sesión iniciada |
+| Catálogo, detalle, blogs, contacto | Público |
+
+- Sin sesión, `RutaProtegida` redirige al login y después devuelve al usuario a la página que intentaba abrir.
+- Con sesión pero sin el rol necesario, muestra **ACCESO DENEGADO**.
+- El menú oculta las opciones de administración a los clientes.
+
+La seguridad real está en el backend, que valida el token y el rol en cada petición: las restricciones del frontend mejoran la experiencia, pero no son la única protección.
