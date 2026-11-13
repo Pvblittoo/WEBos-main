@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/misPedidos.css";
+import { apiFetch } from "../api.js";
 
 const API = "http://localhost:8080";
 
@@ -64,7 +65,7 @@ export default function MisPedidos() {
         setError("");
 
         // OBTENER PEDIDOS DEL CLIENTE
-        const respuesta = await fetch(
+        const respuesta = await apiFetch(
           `${API}/api/clientes/${clienteId}/boletas`,
           {
             method: "GET",

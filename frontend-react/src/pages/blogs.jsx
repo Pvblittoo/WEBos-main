@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import "../styles/blogs.css";
+import { apiFetch } from "../api.js";
 
 const API = "http://localhost:8080";
 
@@ -15,7 +16,7 @@ export default function Blogs() {
 
     async function cargarBlogs() {
       try {
-        const respuesta = await fetch(`${API}/api/blogs`, {
+        const respuesta = await apiFetch(`${API}/api/blogs`, {
           signal: controlador.signal,
         });
 

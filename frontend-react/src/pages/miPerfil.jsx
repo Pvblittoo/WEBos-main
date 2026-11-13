@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/miPerfil.css";
+import { apiFetch } from "../api.js";
 
 const API = "http://localhost:8080";
 
@@ -15,7 +16,7 @@ export default function MiPerfil() {
 
     async function cargarPerfil() {
       try {
-        const respuesta = await fetch(
+        const respuesta = await apiFetch(
           `${API}/api/clientes/me`,
           {
             credentials: "include",

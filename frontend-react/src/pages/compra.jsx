@@ -1,9 +1,7 @@
-
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import "../styles/compraReact.css";
-
-const API = "http://localhost:8080";
+import { apiFetch, extraerMensaje } from "../api.js";
 
 function Compra() {
   const [searchParams] = useSearchParams();
@@ -18,7 +16,7 @@ function Compra() {
   const [mensaje, setMensaje] = useState("");
   const [agregado, setAgregado] = useState(false);
 
-  // CARGAR PRODUCTO DESDE SPRING BOOT
+  // CARGAR PRODUCTO DESDE SPRING BOOT (endpoint público)
   useEffect(() => {
     const controlador = new AbortController();
 
@@ -38,11 +36,10 @@ function Compra() {
       setMensaje("");
 
       try {
-        const respuesta = await fetch(
-          `${API}/api/productos/${encodeURIComponent(id)}`,
+        const respuesta = await apiFetch(
+          `/api/productos/${encodeURIComponent(id)}`,
           {
             method: "GET",
-            credentials: "include",
             signal: controlador.signal,
           }
         );
@@ -101,7 +98,7 @@ function Compra() {
       return;
     }
 
-    // VALIDAR CANTIDAD
+    // VALIDAR CANTIDAD (el backend vuelve a validar el stock)
     if (
       !Number.isInteger(cantidad) ||
       cantidad < 1 ||
@@ -113,7 +110,7 @@ function Compra() {
       return;
     }
 
-    // OBTENER USUARIO
+    // OBTENER USUARIO (datos no sensibles guardados al iniciar sesión)
     let usuario = null;
 
     try {
@@ -136,19 +133,15 @@ function Compra() {
 
     try {
       // PETICIÓN AL BACKEND
-      const respuesta = await fetch(
-        `${API}/api/clientes/${usuario.id}/carrito/items`,
+      // apiFetch agrega el header "Authorization: Bearer <token>"
+      // y renueva el token automáticamente si expiró.
+      const respuesta = await apiFetch(
+        `/api/clientes/${usuario.id}/carrito/items`,
         {
           method: "POST",
-
-          // IMPORTANTE:
-          // ENVÍA LA COOKIE DE SESIÓN A SPRING BOOT
-          credentials: "include",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             productoId: producto.id,
             cantidad: cantidad,
@@ -181,7 +174,9 @@ function Compra() {
           }
         );
 
+        // Muestra el mensaje del backend (por ejemplo, "Stock insuficiente")
         throw new Error(
+          extraerMensaje(texto) ||
           `No se pudo agregar el producto al carrito (error ${respuesta.status}).`
         );
       }

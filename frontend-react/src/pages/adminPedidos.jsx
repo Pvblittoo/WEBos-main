@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/adminPedidos.css";
+import { apiFetch } from "../api.js";
 
 const API = "http://localhost:8080/api/admin/boletas";
 
@@ -29,7 +30,7 @@ export default function AdminPedidos() {
       setCargando(true);
       setError("");
 
-      const respuesta = await fetch(API, {
+      const respuesta = await apiFetch(API, {
         credentials: "include",
       });
 
@@ -55,7 +56,7 @@ export default function AdminPedidos() {
       setGuardando(id);
       setError("");
 
-      const respuesta = await fetch(`${API}/${id}/estado`, {
+      const respuesta = await apiFetch(`${API}/${id}/estado`, {
         method: "PUT",
         credentials: "include",
         headers: {

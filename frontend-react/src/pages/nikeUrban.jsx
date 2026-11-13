@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { apiFetch } from "../api.js";
 
 import WebGLBackground from '../components/webGLBackground.jsx';
 import '../styles/nikeUrban.css';
@@ -16,7 +17,7 @@ function NikeUrban() {
 
     async function cargarProductos() {
       try {
-        const respuesta = await fetch(
+        const respuesta = await apiFetch(
           'http://localhost:8080/api/productos/categoria/urban',
           {
             signal: controlador.signal,

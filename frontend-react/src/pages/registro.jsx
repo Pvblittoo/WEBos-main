@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/registro.css";
+import { apiFetch } from "../api.js";
 
 const regiones = {
   "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
@@ -132,7 +133,7 @@ function Registro() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch(
+      const respuesta = await apiFetch(
         "http://localhost:8080/api/clientes",
         {
           method: "POST",

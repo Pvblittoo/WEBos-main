@@ -1,6 +1,13 @@
-
 import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+
+import {
+  apiFetch,
+  renovarToken,
+  guardarUsuario,
+  limpiarSesion,
+} from "./api.js";
+import RutaProtegida from "./components/RutaProtegida.jsx";
 
 import Navbar from "./components/Navbar.jsx";
 import MarcaCard from "./components/MarcaCard.jsx";
@@ -35,8 +42,6 @@ import AdminPedidos from "./pages/adminPedidos.jsx";
 import AdminUsuarios from "./pages/adminUsuarios.jsx";
 
 import "./styles/colecciones.css";
-
-const API = "http://localhost:8080";
 
 // NORMALIZAR DATOS DEL USUARIO
 function normalizarUsuario(cliente) {
@@ -114,28 +119,6 @@ function PaginaPrincipal({ usuario }) {
       <Portada usuario={usuario} />
       <Inicio />
     </>
-  );
-}
-
-// ACCESO DENEGADO
-function AccesoDenegado() {
-  return (
-    <main
-      className="container py-5 text-white"
-      style={{ minHeight: "70vh" }}
-    >
-      <h2 style={{ color: "#ff1744" }}>
-        ACCESO DENEGADO
-      </h2>
-
-      <p>
-        No tienes permisos para entrar a esta página.
-      </p>
-
-      <Link to="/" style={{ color: "#ff1744" }}>
-        VOLVER AL INICIO
-      </Link>
-    </main>
   );
 }
 
@@ -302,107 +285,63 @@ function App() {
   const [cerrandoSesion, setCerrandoSesion] =
     useState(false);
 
-  // COMPROBAR SESIÓN REAL AL ABRIR LA APP
+  // RESTAURAR SESIÓN AL ABRIR O RECARGAR LA PÁGINA
+  // El accessToken vive solo en memoria y se pierde al recargar. Con la
+  // cookie HttpOnly de refresh se pide uno nuevo al backend; si la cookie
+  // no existe o expiró, el usuario queda como visitante.
   useEffect(() => {
     let activo = true;
 
-    const comprobarSesion = async () => {
-      try {
-        const respuesta = await fetch(
-          `${API}/api/clientes/me`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
-
-        if (!respuesta.ok) {
-          throw new Error("Sesión no válida");
-        }
-
-        const cliente = await respuesta.json();
-
-        const usuarioSeguro =
-          normalizarUsuario(cliente);
-
-        if (activo) {
-          sessionStorage.setItem(
-            "facture_usuario",
-            JSON.stringify(usuarioSeguro)
-          );
-
-          setUsuario(usuarioSeguro);
-        }
-      } catch {
-        if (activo) {
-          sessionStorage.removeItem(
-            "facture_usuario"
-          );
-
-          setUsuario(null);
-        }
-      } finally {
-        if (activo) {
-          setVerificandoSesion(false);
-        }
-      }
-    };
-
-    comprobarSesion();
+    renovarToken()
+      .then((datos) => {
+        if (!activo) return;
+        const usuarioSeguro = normalizarUsuario(datos);
+        guardarUsuario(usuarioSeguro);
+        setUsuario(usuarioSeguro);
+      })
+      .catch(() => {
+        if (!activo) return;
+        limpiarSesion();
+        setUsuario(null);
+      })
+      .finally(() => {
+        if (activo) setVerificandoSesion(false);
+      });
 
     return () => {
       activo = false;
     };
   }, []);
 
-  // INICIAR SESIÓN
+  // SI EL TOKEN NO SE PUEDE RENOVAR EN MEDIO DE LA NAVEGACIÓN
+  useEffect(() => {
+    const alExpirar = () => setUsuario(null);
+    window.addEventListener("sesion-expirada", alExpirar);
+    return () => window.removeEventListener("sesion-expirada", alExpirar);
+  }, []);
+
+  // INICIAR SESIÓN (el token ya fue guardado en memoria por login.jsx)
   const iniciarSesion = (cliente) => {
-    const usuarioSeguro =
-      normalizarUsuario(cliente);
-
-    sessionStorage.setItem(
-      "facture_usuario",
-      JSON.stringify(usuarioSeguro)
-    );
-
+    const usuarioSeguro = normalizarUsuario(cliente);
+    guardarUsuario(usuarioSeguro);
     setUsuario(usuarioSeguro);
   };
 
-  // CERRAR SESIÓN
+  // CERRAR SESIÓN: el backend revoca todos los tokens y borra la cookie
   const cerrarSesion = async () => {
     if (cerrandoSesion) return;
 
     setCerrandoSesion(true);
 
     try {
-      const respuesta = await fetch(
-        `${API}/api/clientes/logout`,
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
-
-      if (!respuesta.ok) {
-        throw new Error(
-          "No se pudo cerrar la sesión"
-        );
-      }
-
-      sessionStorage.removeItem(
-        "facture_usuario"
-      );
-
-      setUsuario(null);
-
-      window.location.assign("/");
-    } catch (error) {
-      alert(
-        "No se pudo cerrar la sesión en el servidor. " +
-        "Inténtalo nuevamente."
-      );
+      await apiFetch("/api/clientes/logout", { method: "POST" });
+    } catch {
+      // Aunque el servidor no responda, la sesión local se cierra igual
     } finally {
+      limpiarSesion();
+      setUsuario(null);
       setCerrandoSesion(false);
+      window.location.assign("/");
     }
   };
 
@@ -525,87 +464,83 @@ function App() {
           element={<Compra />}
         />
 
-        {/* CHECKOUT */}
+        {/* CHECKOUT: requiere sesión */}
         <Route
           path="/checkout"
-          element={<Checkout />}
+          element={
+            <RutaProtegida usuario={usuario}>
+              <Checkout />
+            </RutaProtegida>
+          }
         />
 
-        {/* COMPRA EXITOSA */}
+        {/* COMPRA EXITOSA: requiere sesión */}
         <Route
           path="/compra-exitosa"
-          element={<CompraExitosa />}
+          element={
+            <RutaProtegida usuario={usuario}>
+              <CompraExitosa />
+            </RutaProtegida>
+          }
         />
 
-        {/* MIS PEDIDOS */}
+        {/* MIS PEDIDOS: requiere sesión */}
         <Route
           path="/mis-pedidos"
           element={
-            usuario ? (
+            <RutaProtegida usuario={usuario}>
               <MisPedidos />
-            ) : (
-              <AccesoDenegado />
-            )
+            </RutaProtegida>
           }
         />
 
-        {/* NUEVO: MI PERFIL */}
+        {/* MI PERFIL: requiere sesión */}
         <Route
           path="/mi-perfil"
           element={
-            usuario ? (
+            <RutaProtegida usuario={usuario}>
               <MiPerfil />
-            ) : (
-              <AccesoDenegado />
-            )
+            </RutaProtegida>
           }
         />
 
-        {/* PANEL ADMINISTRADOR */}
+        {/* PANEL ADMINISTRADOR: requiere rol ADMIN */}
         <Route
           path="/admin"
           element={
-            usuario?.rol === "ADMIN" ? (
+            <RutaProtegida usuario={usuario} rol="ADMIN">
               <PanelAdmin />
-            ) : (
-              <AccesoDenegado />
-            )
+            </RutaProtegida>
           }
         />
 
-        {/* GESTIÓN DE PRODUCTOS */}
+        {/* GESTIÓN DE PRODUCTOS: requiere rol ADMIN */}
         <Route
           path="/admin/productos"
           element={
-            usuario?.rol === "ADMIN" ? (
+            <RutaProtegida usuario={usuario} rol="ADMIN">
               <AdminProductos />
-            ) : (
-              <AccesoDenegado />
-            )
+            </RutaProtegida>
           }
         />
 
-        {/* GESTIÓN DE PEDIDOS */}
+        {/* GESTIÓN DE PEDIDOS: requiere rol ADMIN */}
         <Route
           path="/admin/pedidos"
           element={
-            usuario?.rol === "ADMIN" ? (
+            <RutaProtegida usuario={usuario} rol="ADMIN">
               <AdminPedidos />
-            ) : (
-              <AccesoDenegado />
-            )
+            </RutaProtegida>
           }
         />
 
-        {/* GESTIÓN DE USUARIOS */}
+        {/* GESTIÓN DE USUARIOS: requiere rol ADMIN */}
         <Route
           path="/admin/usuarios"
           element={
-            usuario?.rol === "ADMIN" ? (
+            <RutaProtegida usuario={usuario} rol="ADMIN">
               <AdminUsuarios />
-            ) : (
-              <AccesoDenegado />
-            )
+            </RutaProtegida>
           }
         />
       </Routes>

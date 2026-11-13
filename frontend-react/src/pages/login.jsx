@@ -1,11 +1,14 @@
-
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../styles/login.css";
+import { apiFetch, setAccessToken } from "../api.js";
 
 export default function Login({ onLogin }) {
 
   const navigate = useNavigate();
+  const location = useLocation();
+  // Página protegida que el usuario intentaba abrir antes de iniciar sesión
+  const destino = location.state?.from;
 
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
@@ -21,11 +24,10 @@ export default function Login({ onLogin }) {
     setCargando(true);
 
     try {
-      const respuesta = await fetch(
-        "http://localhost:8080/api/clientes/login",
+      const respuesta = await apiFetch(
+        "/api/clientes/login",
         {
           method: "POST",
-          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -50,7 +52,11 @@ export default function Login({ onLogin }) {
 
       const cliente = await respuesta.json();
 
-      // Guardar datos básicos del usuario
+      // El accessToken (JWT) queda solo en memoria. El refreshToken lo
+      // guardó el navegador en una cookie HttpOnly que JS no puede leer.
+      setAccessToken(cliente.accessToken);
+
+      // Guardar solo datos básicos (no sensibles) para la interfaz
       const usuario = {
         id: cliente.id,
         nombre: cliente.nombreCompleto,
@@ -72,7 +78,9 @@ export default function Login({ onLogin }) {
       setMensaje("¡Inicio de sesión exitoso!");
 
       setTimeout(() => {
-        if (cliente.rol === "ADMIN") {
+        if (destino) {
+          navigate(destino, { replace: true });
+        } else if (cliente.rol === "ADMIN") {
           navigate("/admin");
         } else {
           navigate("/");

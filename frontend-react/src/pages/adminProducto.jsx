@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/adminProducto.css";
+import { apiFetch } from "../api.js";
 
 const API = "http://localhost:8080/api/productos";
 
@@ -33,7 +34,7 @@ export default function AdminProductos() {
     setCargando(true);
 
     try {
-      const respuesta = await fetch(API, {
+      const respuesta = await apiFetch(API, {
         credentials: "include",
       });
 
@@ -150,7 +151,7 @@ export default function AdminProductos() {
     try {
       setGuardando(true);
 
-      const respuesta = await fetch(
+      const respuesta = await apiFetch(
         editando ? `${API}/${editandoId}` : API,
         {
           method: editando ? "PUT" : "POST",
@@ -206,7 +207,7 @@ export default function AdminProductos() {
     try {
       setEliminandoId(producto.id);
 
-      const respuesta = await fetch(
+      const respuesta = await apiFetch(
         `${API}/${producto.id}`,
         {
           method: "DELETE",

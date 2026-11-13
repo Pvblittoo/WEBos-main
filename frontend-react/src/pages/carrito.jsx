@@ -1,9 +1,7 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/carrito.css";
-
-const API = "http://localhost:8080";
+import { apiFetch, extraerMensaje } from "../api.js";
 
 const formatoPrecio = (valor) =>
   new Intl.NumberFormat("es-CL", {
@@ -19,6 +17,7 @@ export default function Carrito() {
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
 
+  // Datos no sensibles del usuario guardados al iniciar sesión
   const usuario = (() => {
     try {
       return JSON.parse(
@@ -31,7 +30,8 @@ export default function Carrito() {
 
   const clienteId = usuario?.id;
 
-  const baseUrl = `${API}/api/clientes/${clienteId}/carrito`;
+  // apiFetch agrega la dirección del servidor y el token JWT
+  const baseUrl = `/api/clientes/${clienteId}/carrito`;
 
   useEffect(() => {
     if (!clienteId) {
@@ -46,9 +46,8 @@ export default function Carrito() {
         setCargando(true);
         setError("");
 
-        const respuesta = await fetch(baseUrl, {
+        const respuesta = await apiFetch(baseUrl, {
           method: "GET",
-          credentials: "include",
         });
 
         if (!respuesta.ok) {
@@ -96,10 +95,7 @@ export default function Carrito() {
     setError("");
 
     try {
-      const respuesta = await fetch(url, {
-        ...opciones,
-        credentials: "include",
-      });
+      const respuesta = await apiFetch(url, opciones);
 
       if (!respuesta.ok) {
         if (respuesta.status === 401) {
@@ -116,8 +112,9 @@ export default function Carrito() {
 
         const texto = await respuesta.text();
 
+        // Muestra el mensaje del backend (por ejemplo, "Stock insuficiente")
         throw new Error(
-          texto || "Error al modificar el carrito."
+          extraerMensaje(texto) || "Error al modificar el carrito."
         );
       }
 
@@ -235,7 +232,8 @@ export default function Carrito() {
           </p>
         )}
 
-        {!cargando && !error && items.length === 0 && (
+        {/* CARRITO VACÍO: solo si el carrito se cargó y no tiene productos */}
+        {!cargando && carrito && items.length === 0 && (
           <div className="carrito-vacio">
             <h2>Tu carrito está vacío 🛒</h2>
 
@@ -250,7 +248,8 @@ export default function Carrito() {
           </div>
         )}
 
-        {!cargando && !error && items.length > 0 && (
+        {/* PRODUCTOS: se siguen mostrando aunque falle una operación (ej. stock) */}
+        {!cargando && items.length > 0 && (
           <>
             <div className="row g-4">
             <div className="col-12 col-lg-8">
@@ -355,18 +354,18 @@ export default function Carrito() {
                 <strong>
                   {formatoPrecio(carrito.total)}
                 </strong>
-
-                <Link
-                  to="/checkout"
-                  className="carrito-boton"
-                >
-                  FINALIZAR COMPRA
-                </Link>
               </div>
+
+              <Link
+                to="/checkout"
+                className="carrito-boton w-100"
+              >
+                FINALIZAR COMPRA
+              </Link>
 
               <button
                 type="button"
-                className="carrito-vaciar"
+                className="carrito-vaciar w-100"
                 disabled={procesando}
                 onClick={vaciarCarrito}
               >

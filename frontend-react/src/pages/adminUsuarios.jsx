@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/adminUsuarios.css";
+import { apiFetch } from "../api.js";
 
 const API = "http://localhost:8080/api/admin/clientes";
 
@@ -14,7 +15,7 @@ export default function AdminUsuarios() {
   useEffect(() => {
     async function cargarUsuarios() {
       try {
-        const respuesta = await fetch(API, {
+        const respuesta = await apiFetch(API, {
           credentials: "include",
         });
 

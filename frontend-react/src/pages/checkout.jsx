@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/checkout.css";
+import { apiFetch } from "../api.js";
+
 
 const API = "http://localhost:8080";
 
@@ -49,7 +51,7 @@ export default function Checkout() {
       setError("");
 
       try {
-        const respuesta = await fetch(
+        const respuesta = await apiFetch(
           `${API}/api/clientes/${clienteId}/carrito`,
           {
             method: "GET",
@@ -126,7 +128,7 @@ export default function Checkout() {
     setProcesando(true);
 
     try {
-      const respuesta = await fetch(
+      const respuesta = await apiFetch(
         `${API}/api/clientes/${clienteId}/boletas`,
         {
           method: "POST",
@@ -235,7 +237,7 @@ export default function Checkout() {
         )}
 
         {/* CARRITO VACÍO */}
-        {!cargando && !error && items.length === 0 && (
+        {!cargando && carrito && items.length === 0 && (
           <>
             <p>Tu carrito está vacío.</p>
 
@@ -249,7 +251,7 @@ export default function Checkout() {
         )}
 
         {/* RESUMEN DEL PEDIDO */}
-        {!cargando && !error && items.length > 0 && (
+               {!cargando && items.length > 0 && (
           <>
             <h2>RESUMEN DE TU PEDIDO</h2>
 

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import '../styles/detalleReact.css';
+import { apiFetch } from "../api.js";
 
 function Detalle() {
   const [searchParams] = useSearchParams();
@@ -26,7 +27,7 @@ function Detalle() {
       setProducto(null);
 
       try {
-        const respuesta = await fetch(
+        const respuesta = await apiFetch(
           `http://localhost:8080/api/productos/${encodeURIComponent(id)}`,
           { signal: controlador.signal }
         );
